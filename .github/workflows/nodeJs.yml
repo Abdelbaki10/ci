@@ -20,4 +20,7 @@ jobs:
         node-version: 18
         cache: 'npm'
     - run: npm ci
-    - run: npm run test
+    - name: set up env var 
+      run : echo "$MY_SECRET_TEST" > .env
+    - name: run jest test 
+      run: npm run test
