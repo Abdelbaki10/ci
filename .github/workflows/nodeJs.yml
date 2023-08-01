@@ -5,19 +5,25 @@ name: Node.js CI
 
 on:
   pull_request:
-    branches: [ "master" ]
+    branches: ["master"]
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
-
+    env: 
+        TEST_BAKI: "${{fromJSON(secrets.MY_SECRET_TEST).TEST_BAKI }}"
     steps:
-    - uses: actions/checkout@v3
-    - name: Use Node.js 18
-      uses: actions/setup-node@v3
-      with:
-        node-version: 18
-        cache: 'npm'
-    - run: npm ci
-    - run: npm run test
+      - uses: actions/checkout@v3
+      - name: Set up .env variables
+        run: export TEST_BAKI="${{fromJSON(secrets.MY_SECRET_TEST).TEST_BAKI }}"
+      - name: Echo test value
+        run: echo "$TEST_BAKI"
+      - name: Use Node.js 18
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          cache: "npm"
+      - name: install project dependecies
+        run: npm ci
+      - name: Run unit test
+        run: npm run test
