@@ -1,5 +1,6 @@
 const userModel = require("../models/user.model");
-
+const dotenv =  require('dotenv');
+dotenv.config()
 const login = async (req, res) => {
     const enVariable_B = process.env.TEST_BAKI || "default value";
   const enVariable_T = process.env.TEST_TAKI || "default value";
