@@ -24,4 +24,4 @@ jobs:
       - name: install project dependecies
         run: npm ci
       - name: Run unit test
-        run: npm run test -- --env TEST_BAKI="$TEST_BAKI"
+        run: npm run test
