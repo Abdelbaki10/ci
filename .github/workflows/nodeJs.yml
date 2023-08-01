@@ -10,10 +10,17 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    env:
-      TEST_BAKI: {}
+
     steps:
-     - name: Set environment variables
+      - uses: actions/checkout@v3
+      - name: Use Node.js 18
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          cache: "npm"
+      - name: install project dependecies
+        run: npm ci
+      - name: Set environment variables
         run: |
             # Load the secret into a variable
             SECRET=$(echo "${{ secrets.MY_SECRET_TEST }}" | base64 --decode)
@@ -23,13 +30,5 @@ jobs:
               echo "Setting $key=$value"
               echo "::set-env name=$key::$value"
             done <<< "$SECRET"
-      - uses: actions/checkout@v3
-      - name: Use Node.js 18
-        uses: actions/setup-node@v3
-        with:
-          node-version: 18
-          cache: "npm"
-      - name: install project dependecies
-        run: npm ci
       - name: Run unit test
         run: npm run test
