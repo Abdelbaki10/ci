@@ -21,6 +21,8 @@ jobs:
         cache: 'npm'
     - run: npm ci
     - name: set up env var 
-      run : echo "$MY_SECRET_TEST" > .env
+      env:
+        MY_SECRET_TEST: ${{ secrets.MY_SECRET_TEST }}
+        run : echo "$MY_SECRET_TEST" > .env
     - name: run jest test 
       run: npm run test
