@@ -5,19 +5,27 @@ name: Node.js CI
 
 on:
   pull_request:
-    branches: [ "master" ]
+    branches: ["master"]
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v3
-    - name: Use Node.js 18
-      uses: actions/setup-node@v3
-      with:
-        node-version: 18
-        cache: 'npm'
-    - run: npm ci
-    - run: npm run test
+      - uses: actions/checkout@v3
+      - name: Set up .env variables
+        run: |
+          # Extract environment variables from JSON string
+          TEST_BAKI: ${{ fromJSON(secrets.MY_SECRET_TEST).TEST_BAKI }}
+          TEST_TAKI: ${{ fromJSON(secrets.MY_SECRET_TEST).TEST_TAKI }}
+          TEST_MOHAMED: ${{ fromJSON(secrets.MY_SECRET_TEST).MOHAMED }}
+          TEST_YASMINA: ${{ fromJSON(secrets.MY_SECRET_TEST).TEST_YASMINA }}
+      - name: Use Node.js 18
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          cache: "npm"
+      - name: install project dependecies
+        run: npm ci
+      - name: Run unit test
+        run: npm run test
