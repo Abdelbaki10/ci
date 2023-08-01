@@ -15,10 +15,12 @@ jobs:
       - uses: actions/checkout@v3
       - name: Set up .env variables
         run: |
-          export TEST_BAKI: ${{ fromJSON(secrets.MY_SECRET_TEST).TEST_BAKI }}
-          export TEST_TAKI: ${{ fromJSON(secrets.MY_SECRET_TEST).TEST_TAKI }}
-          export TEST_MOHAMED: ${{ fromJSON(secrets.MY_SECRET_TEST).MOHAMED }}
-          export TEST_YASMINA: ${{ fromJSON(secrets.MY_SECRET_TEST).TEST_YASMINA }}
+
+          JSON_STRING=$(sed 's/\s//g' <<< "${{ secrets.MY_SECRET_TEST }}")
+          export TEST_BAKI="${{ fromJSON(JSON_STRING).TEST_BAKI }}"
+          export TEST_TAKI="${{ fromJSON(JSON_STRING).TEST_TAKI }}"
+          export TEST_MOHAMED="${{ fromJSON(JSON_STRING).TEST_MOHAMED }}"
+          export TEST_YASMINA="${{ fromJSON(JSON_STRING).TEST_YASMINA }}"
       - name: Use Node.js 18
         uses: actions/setup-node@v3
         with:
