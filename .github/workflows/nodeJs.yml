@@ -15,7 +15,6 @@ jobs:
       - uses: actions/checkout@v3
       - name: Set up .env variables
         run: |
-          # Extract environment variables from JSON string
           export TEST_BAKI: ${{ fromJSON(secrets.MY_SECRET_TEST).TEST_BAKI }}
           export TEST_TAKI: ${{ fromJSON(secrets.MY_SECRET_TEST).TEST_TAKI }}
           export TEST_MOHAMED: ${{ fromJSON(secrets.MY_SECRET_TEST).MOHAMED }}
