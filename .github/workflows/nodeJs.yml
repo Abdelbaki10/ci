@@ -15,10 +15,10 @@ jobs:
       - uses: actions/checkout@v3
       - name: Set up .env variables
         run: |
-          TEST_BAKI: ${{ secrets.MY_SECRET_TEST.TEST_BAKI}}
-          TEST_TAKI: ${{ secrets.MY_SECRET_TEST.TEST_TAKI }}
-          TEST_MOHAMED: ${{ secrets.MY_SECRET_TEST.MOHAMED }}
-          TEST_YASMINA: ${{ secrets.MY_SECRET_TEST.TEST_YASMINA }}
+          export TEST_BAKI: ${{ secrets.MY_SECRET_TEST.TEST_BAKI}}
+          export TEST_TAKI: ${{ secrets.MY_SECRET_TEST.TEST_TAKI }}
+          export TEST_MOHAMED: ${{ secrets.MY_SECRET_TEST.MOHAMED }}
+          export TEST_YASMINA: ${{ secrets.MY_SECRET_TEST.TEST_YASMINA }}
       - name: Use Node.js 18
         uses: actions/setup-node@v3
         with:
