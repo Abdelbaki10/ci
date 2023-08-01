@@ -22,5 +22,7 @@ jobs:
     - run: npm ci
     
     - name : Set up environment variables
-    - run : echo "$MY_SECRET_TEST" > .env
-    - run: npm run test
+      run : echo "$MY_SECRET_TEST" > .env
+      
+    - name: start jest unit tests  
+      run: npm run test
