@@ -13,7 +13,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Set up .env variables
-        run: export TEST="${{fromJSON(secrets.MY_SECRET_TEST).TEST_BAKI }}"
+        run: export TEST_BAKI="${{fromJSON(secrets.MY_SECRET_TEST).TEST_BAKI }}"
       - name: Echo test value
         run: echo "$TEST"
       - name: Use Node.js 18
@@ -24,4 +24,4 @@ jobs:
       - name: install project dependecies
         run: npm ci
       - name: Run unit test
-        run: npm run test
+        run: npm run test -- --env TEST_BAKI="$TEST_BAKI"
