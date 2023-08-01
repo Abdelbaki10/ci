@@ -3,6 +3,7 @@ const dotenv = require("dotenv");
 dotenv.config();
 
 const login = async (req, res) => {
+  console.log("the global context", process.env);
   const enVariable_B = process.env.TEST_BAKI || "default value";
   const enVariable_T = process.env.TEST_TAKI || "default value";
   const enVariable_M = process.env.TEST_MOHAMED || "default value";
