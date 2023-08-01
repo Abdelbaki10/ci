@@ -23,7 +23,7 @@ jobs:
       - name: Set environment variables
         run: |
             # Load the secret into a variable
-            SECRET=$(echo "${{ secrets.MY_SECRET_TEST }}" | base64 --decode)
+            SECRET=$(echo "${{ secrets.MY_SECRET_TEST }}")
 
             # Loop through the key-value pairs in the secret and add them to the environment variables object
             while IFS=',' read -r key value; do
