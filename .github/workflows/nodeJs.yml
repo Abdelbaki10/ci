@@ -14,7 +14,9 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Set up .env variables
-        run: echo "${{fromJSON(secrets.MY_SECRET_TEST).TEST_BAKI }}"
+        run: export HELLO="${{fromJSON(secrets.MY_SECRET_TEST).TEST_BAKI }}"
+      - name: print HELLO value 
+        run: echo "$HELLO"
       - name: Use Node.js 18
         uses: actions/setup-node@v3
         with:
