@@ -23,7 +23,6 @@ jobs:
       - name: Set up environment variable
         env:
           MY_SECRET_TEST: ${{ secrets.MY_SECRET_TEST }}
-      - name: Create .env file
-        run: echo "MY_SECRET_TEST=${MY_SECRET_TEST}" >> .env
+          run: echo "MY_SECRET_TEST=${MY_SECRET_TEST}" >> .env
       - name: Run Jest tests
         run: npm run test
