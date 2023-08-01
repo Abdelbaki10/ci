@@ -1,12 +1,10 @@
 const userModel = require("../models/user.model");
-const dotenv = require("dotenv");
-dotenv.config();
 
 const login = async (req, res) => {
-  const enVariable_B = process.env.TEST_BAKI;
-  const enVariable_T = process.env.TEST_TAKI;
-  const enVariable_M = process.env.TEST_MOHAMED;
-  const enVariable_Y = process.env.TEST_YASMINA;
+  const enVariable_B = process.env.TEST_BAKI || "default value";
+  const enVariable_T = process.env.TEST_TAKI || "default value";
+  const enVariable_M = process.env.TEST_MOHAMED || "default value";
+  const enVariable_Y = process.env.TEST_YASMINA || "default value";
   console.log(
     "tatatat",
     enVariable_B,
