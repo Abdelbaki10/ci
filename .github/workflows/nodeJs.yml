@@ -15,7 +15,7 @@ jobs:
       - name: Set up .env variables
         run: export TEST_BAKI="${{fromJSON(secrets.MY_SECRET_TEST).TEST_BAKI }}"
       - name: Echo test value
-        run: echo "$TEST"
+        run: echo "$TEST_BAKI"
       - name: Use Node.js 18
         uses: actions/setup-node@v3
         with:
