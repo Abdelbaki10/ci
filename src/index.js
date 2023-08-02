@@ -1,15 +1,17 @@
-const express = require('express');
+const express = require("express");
+const mongoose = require("mongoose");
+const db_url = "mongodb://localhost:27017/bakiDB";
+
+const { login } = require("./controllers/login.controller");
 
 const app = express();
-
-app.get('/', (req, res) => {
-    res.status(200).send('App is running on port 4000')
-})
+mongoose.connect(db_url).then(() => console.log("connected with success"));
+app.get("/", login);
 
 app.get('/test', (req, res) => {
     res.status(200).send('adding test route')
 })
 
 app.listen(4000, () => {
-    console.log('app is runing on port 4000');
-})
+  console.log("app is runing on port 4000");
+});

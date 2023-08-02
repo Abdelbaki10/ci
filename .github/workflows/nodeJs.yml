@@ -5,19 +5,32 @@ name: Node.js CI
 
 on:
   pull_request:
-    branches: [ "master" ]
+    branches: ["master"]
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
+    env:
+      ACTIONS_ALLOW_UNSECURE_COMMANDS: true
 
     steps:
-    - uses: actions/checkout@v3
-    - name: Use Node.js 18
-      uses: actions/setup-node@v3
-      with:
-        node-version: 18
-        cache: 'npm'
-    - run: npm ci
-    - run: npm run test
+      - uses: actions/checkout@v3
+      - name: Use Node.js 18
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          cache: "npm"
+      - name: install project dependecies
+        run: npm ci
+      - name: Set environment variables
+        run: |
+          # Load the secret into a variable
+          SECRET=$(echo "${{ secrets.MY_SECRET_TEST }}")
+
+          # Loop through the key-value pairs in the secret and add them to the environment variables object
+          while IFS=',' read -r key value; do
+            echo "Setting $key=$value"
+            echo "::set-env name=$key::$value"
+          done <<< "$SECRET"
+      - name: Run unit test
+        run: npm run test
