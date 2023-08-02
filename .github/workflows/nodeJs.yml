@@ -5,19 +5,33 @@ name: Node.js CI
 
 on:
   pull_request:
-    branches: [ "master" ]
+    branches: ["master"]
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
-
+    env:
+      TEST_BAKI: ${{ fromJSON(secrets.MY_SECRET_TEST).LOYALTY_CLIENT_EMAIL }}
+      TEST_TAKI: ${{ fromJSON(secrets.MY_SECRET_TEST).LOYALTY_PRIVATE_KEY }}
     steps:
-    - uses: actions/checkout@v3
-    - name: Use Node.js 18
-      uses: actions/setup-node@v3
-      with:
-        node-version: 18
-        cache: 'npm'
-    - run: npm ci
-    - run: npm run test
+      - uses: actions/checkout@v3
+      - name: Use Node.js 18
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          cache: "npm"
+      - name: install project dependecies
+        run: npm ci
+      - name: Run unit test
+        run: npm run test
+# LOYALTY_PRIVATE_KEY_ID:"731c9f764fc4af85b782ca01fc658e36f8fd0c2c",
+# LOYALTY_PRIVATE_KEY:"-----BEGIN PRIVATE KEY-----\nMIIEuwIBADANBgkqhkiG9w0BAQEFAASCBKUwggShAgEAAoIBAQCbKSG9VmE8j6k6\no/ar6yrUdIJzQwnNxYv01Itfm7juFRARN/Dev4jFs059Tlz+do4oLmegJsW5561x\nhPIywJRoTTOB0hOzqU0vkn4ob2UmPai4T9J7miMNWH376N11lgKFDvd97hovMlal\nZgSysCGZKGRYKh624oznzd8OC1tBcew7+3qFNy5+fu4gVYx9peRV1Bz8/VB4H2/5\njwzESDTh2vGq0JQb7lG3EbI8IdsLdbXMYjx+qFkqlfgQPtXONgQNiFP1lN1tBWZX\nwTB70P1al/rcIO0GvrILwE1u/13zYt57MEj3CSsHrcJ9ix1czkulWmvqbtIYCGyl\n5LZJQ3BRAgMBAAECgf8HxN5rj3pX9H5pgD5sODBJq/S5qaLv04nyXaEp8CwFLL67\njn69mgjkMmgJZjKuqvfSRUZozY7gs7DToBxRc+wMroJCPppt1+Im/D8D5e4+2pLG\n+jo22t0bI3apxN0GkN4snktSKvChIn4+TTrP6OhJODBzYHApYVW3pIlphTzh5R3c\nC3sDFQs8TLKqBM25OIAtZNaTrHX/0NzEqpcU5gZOQ2U5dVDNwQlKmsW+YQuUrSCj\naNSex2fZzjRmTU5ogAINFlFpePbKrkA3li0GrWj+j6tTQfpao9JfSlJuMEhZVz6U\n+bfWRd6C4A83kRlLgQZo00g2RZR5qF4tLRfuw+0CgYEAyQQ+wrNuis/UQmTF6EsE\nssn/i+dGzSWMfzPeHmis45edIhCEYXZfPc0CUK1ZS9OmsJIJShOo4UMOhF7HCqlM\noHuLZFbBNXSIjkEwpMCmivm8/RuSt3+Zaha7uFaQCKaTc5PgaosBhzsdjA3RuLfO\nOzoZx3NHYukhuDYxBtBAKu0CgYEAxZnswa+X1goXOyjV3kw1LrUOmj8tvSs2bkTt\nlVWoXFQWXt9TkimKS25ZYp/UKHpXLroUibD+KQnyaeIA1BLxvJx5wmEn4J+8vp05\nTVOx7q5Fi2lk6uWTjtS7IkHomFvual1/u7Ox30C0mO/gsa6HBC0ukGIUoc4+yU3I\n4Q6q2nUCgYApjHEUeVX95xsuZfnqG6dq9QmW90TRHlO97xCYJHanzCy0X8mdA4SI\nF5nE5y+v1p17nZPB9fJQLTYQ8i4d7ARkn2SeZrgkvmODU8IkK5XA4AHKJyraNsuU\n/AHtBidbQmLz3rriCr1UIEnpKuoQTh2YbFfru84jiaBonPrhN6YruQKBgQCNghbX\n+fzdbmqGlk7anG61nTnw4m/J+elH/Jq8CBTC0gEXPg2mLZN5Q3RFuboApuRKdT4C\nATtyfkoY452+QjbV4KUdu+AH770GMKf5pYdWK31oQjjgMzqB3fyJovOEMMnDaGPy\nMtSd0cPDhn2+IQNVzVl8UpD98ypplQfXjF50hQKBgBTCI7Xn+Z9+iGmd1NIvqJFo\nLguyAmDWfCSXNOQ5btRZ1fZX13YDgIkGM5jWeQogKRAWLk1//dXDFa3+kNqtTr44\n/lZBo3e8EEYV6MNCRFfahzZ5fZM4dLjA5UfFF0E1i2iOAdfxw/j+lyBJxb8kwqZh\nWKQy6VNxaOqoOH62GJan\n-----END PRIVATE KEY——\n",
+# LOYALTY_CLIENT_EMAIL:"cloudstorage@yassir-loyalty.iam.gserviceaccount.com",
+# LOYALTY_CLIENT_ID:"107865642529872276906",
+# LOYALTY_AUTH_URI:"https://accounts.google.com/o/oauth2/uth",
+# YASSIR_COUPON_VTC_URL:"https://stg-pricing-influencer.yassir.io/api/",
+# YASSIR_PUBSUB_SUBSCRIPTION:"projects/yassir-loyalty/subscriptions/finished-trips-stg",
+# YASSIR_COUPON_TARGET_AUDIENCE:"711723561363-d346mvi1ka1f89bksu2d2hfbai4juoo6.apps.googleusercontent.com",
+# YASSIR_SEGMENT_CREATE_URL:"http://35.187.188.73:48080/api/internal/v1",
+# max_message:50,
+# MAX_IMAGE_SIZE:20000000
