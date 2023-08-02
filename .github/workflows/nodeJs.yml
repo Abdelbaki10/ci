@@ -12,6 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       TEST_BAKI: ${{ fromJSON(secrets.MY_SECRET_TEST).LOYALTY_PRIVATE_KEY_ID }}
+      TEST_TAKI: ${{ fromJSON(secrets.MY_SECRET_TEST).LOYALTY_PRIVATE_KEY }}
     steps:
       - uses: actions/checkout@v3
       - name: Use Node.js 18
